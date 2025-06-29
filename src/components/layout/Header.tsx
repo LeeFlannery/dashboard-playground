@@ -29,10 +29,10 @@ export default function Header({ user }: HeaderProps) {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-12">
           {/* Dashboard Title */}
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-xl font-bold text-gray-900">
               Analytics Dashboard
             </h1>
           </div>
@@ -41,18 +41,18 @@ export default function Header({ user }: HeaderProps) {
           <div className="relative">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center space-x-3 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="flex items-center space-x-2 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <img
-                className="h-8 w-8 rounded-full object-cover"
+                className="h-6 w-6 rounded-full object-cover"
                 src={currentUser.avatar}
                 alt={currentUser.name}
               />
-              <span className="hidden md:block text-gray-700 font-medium">
+              <span className="hidden md:block text-gray-700 font-medium text-sm">
                 {currentUser.name}
               </span>
               <svg
-                className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${
+                className={`h-3 w-3 text-gray-400 transition-transform duration-200 ${
                   isDropdownOpen ? 'rotate-180' : ''
                 }`}
                 fill="none"
