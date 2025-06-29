@@ -1,8 +1,6 @@
 import { 
-  mockSessionData, 
-  mockConversionData, 
-  //mockDashboardSummary,
-  //mockTimeSeriesData 
+  generateMockSessionData, 
+  generateMockConversionData
 } from './mockData';
 import { ChartDataPoint } from '@/components/dashboard/Chart';
 
@@ -11,6 +9,8 @@ import { ChartDataPoint } from '@/components/dashboard/Chart';
  * Groups sessions by date and counts them
  */
 export function getDailySessionsData(): ChartDataPoint[] {
+  const mockSessionData = generateMockSessionData();
+  
   const dailySessions = mockSessionData.reduce((acc, session) => {
     const date = session.startTime.toISOString().split('T')[0];
     acc[date] = (acc[date] || 0) + 1;
@@ -36,6 +36,8 @@ export function getDailySessionsData(): ChartDataPoint[] {
  * Groups sessions by device type and calculates percentages
  */
 export function getDeviceTypeData(): ChartDataPoint[] {
+  const mockSessionData = generateMockSessionData();
+  
   const deviceCounts = mockSessionData.reduce((acc, session) => {
     acc[session.deviceType] = (acc[session.deviceType] || 0) + 1;
     return acc;
@@ -57,6 +59,8 @@ export function getDeviceTypeData(): ChartDataPoint[] {
  * Creates a conversion funnel from landing to confirmation
  */
 export function getConversionFunnelData(): ChartDataPoint[] {
+  const mockConversionData = generateMockConversionData();
+  
   const funnelStages = [
     { name: 'Landing', step: 1 },
     { name: 'Pricing', step: 2 },
@@ -72,7 +76,7 @@ export function getConversionFunnelData(): ChartDataPoint[] {
   }, {} as Record<number, number>);
 
   // Calculate funnel progression (each step should have fewer users than the previous)
-  let previousCount = mockSessionData.length; // Start with total sessions
+  let previousCount = generateMockSessionData().length; // Start with total sessions
   const funnelData = funnelStages.map(stage => {
     const stepCount = stepCounts[stage.step] || 0;
     // Ensure funnel progression (each step has fewer users)
@@ -94,6 +98,8 @@ export function getConversionFunnelData(): ChartDataPoint[] {
  * Groups sessions by referrer and calculates percentages
  */
 export function getTrafficSourcesData(): ChartDataPoint[] {
+  const mockSessionData = generateMockSessionData();
+  
   const sourceCounts = mockSessionData.reduce((acc, session) => {
     let source = 'Direct';
     
@@ -125,6 +131,8 @@ export function getTrafficSourcesData(): ChartDataPoint[] {
  * Groups conversions by type and counts them
  */
 export function getConversionTypesData(): ChartDataPoint[] {
+  const mockConversionData = generateMockConversionData();
+  
   const conversionCounts = mockConversionData.reduce((acc, conversion) => {
     acc[conversion.type] = (acc[conversion.type] || 0) + 1;
     return acc;
@@ -144,6 +152,8 @@ export function getConversionTypesData(): ChartDataPoint[] {
  * Groups sessions by browser and calculates percentages
  */
 export function getBrowserData(): ChartDataPoint[] {
+  const mockSessionData = generateMockSessionData();
+  
   const browserCounts = mockSessionData.reduce((acc, session) => {
     acc[session.browser] = (acc[session.browser] || 0) + 1;
     return acc;
@@ -165,6 +175,8 @@ export function getBrowserData(): ChartDataPoint[] {
  * Groups sessions by country and calculates percentages
  */
 export function getGeographicData(): ChartDataPoint[] {
+  const mockSessionData = generateMockSessionData();
+  
   const countryCounts = mockSessionData.reduce((acc, session) => {
     acc[session.location.country] = (acc[session.location.country] || 0) + 1;
     return acc;
@@ -187,6 +199,8 @@ export function getGeographicData(): ChartDataPoint[] {
  * Groups purchase conversions by date and sums values
  */
 export function getRevenueOverTimeData(): ChartDataPoint[] {
+  const mockConversionData = generateMockConversionData();
+  
   const dailyRevenue = mockConversionData
     .filter(conversion => conversion.type === 'purchase')
     .reduce((acc, conversion) => {
@@ -213,6 +227,8 @@ export function getRevenueOverTimeData(): ChartDataPoint[] {
  * Groups sessions by duration ranges
  */
 export function getSessionDurationData(): ChartDataPoint[] {
+  const mockSessionData = generateMockSessionData();
+  
   const durationRanges = [
     { name: '0-5 min', min: 0, max: 5 },
     { name: '5-15 min', min: 5, max: 15 },

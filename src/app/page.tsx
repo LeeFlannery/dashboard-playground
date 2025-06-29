@@ -1,7 +1,7 @@
 import Layout from '@/components/layout/Layout';
 import MetricCard from '@/components/dashboard/MetricCard';
 import Chart from '@/components/dashboard/Chart';
-import { mockDashboardSummary } from '@/lib/mockData';
+import { generateMockDashboardSummary } from '@/lib/mockData';
 import {
   getDailySessionsData,
   getDeviceTypeData,
@@ -12,13 +12,14 @@ import {
 } from '@/lib/chartHelpers';
 
 export default function Dashboard() {
-  // Get chart data from helper functions
+  // Get fresh data from helper functions (randomizes on each call)
   const dailySessionsData = getDailySessionsData();
   const deviceTypeData = getDeviceTypeData();
   const conversionFunnelData = getConversionFunnelData();
   const trafficSourcesData = getTrafficSourcesData();
   const revenueOverTimeData = getRevenueOverTimeData();
   const browserData = getBrowserData();
+  const mockDashboardSummary = generateMockDashboardSummary();
 
   return (
     <Layout>
