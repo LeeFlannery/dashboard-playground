@@ -32,10 +32,12 @@ export default function Layout({ children, className = '' }: LayoutProps) {
       {/* Main content area */}
       <div className="lg:pl-64 flex flex-col min-h-screen">
         {/* Header */}
-        <Header />
+        <div className="fixed top-0 right-0 left-0 lg:left-64 z-30">
+          <Header />
+        </div>
 
         {/* Main content */}
-        <main className={`flex-1 p-4 sm:p-6 lg:p-8 ${className}`}>
+        <main className={`flex-1 pt-16 p-4 sm:p-6 lg:p-8 ${className}`}>
           <div className="max-w-7xl mx-auto">
             {children}
           </div>
